@@ -21,18 +21,22 @@ namespace Sudoku
     public partial class MainWindow : Window
     {
         private const int SIZE = 9;
-        private List<List<int>> puzzle;
+        private Puzzle puzzle;
+        NumberButton selected = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            initGird();
-            setGridData();
+
+            puzzle = new Puzzle(FileIO.readBoard("Puzzles/puzzle1.txt"));
+
+            InitGird();
+            SetGridData();
 
         }
 
         // Adds row and column definitions to equally align elements based on the size of the grid
-        private void initGird()
+        private void InitGird()
         {
             RowDefinition rowDef;
             ColumnDefinition colDef;
@@ -50,10 +54,32 @@ namespace Sudoku
             }
         }
 
-        // sets the values on the board
-        private void setGridData()
+        // Sets the values on the board
+        private void SetGridData()
         {
-            puzzle = FileIO.readBoard("Puzzles/puzzle1.txt");
+            NumberButton numBtn;
+
+            for(int row = 0; row < SIZE; row++)
+            {
+                for(int col = 0; col < SIZE; col++)
+                {
+                    numBtn = new NumberButton(puzzle.ValueAt(row, col));
+                    Grid.SetRow(numBtn, row);
+                    Grid.SetColumn(numBtn, col);
+                    numBtn.ButtonSelected += SelectedChanged;
+                    sudokuGrid.Children.Add(numBtn);
+                }
+            }
+        }
+
+        // Select the new button and deselect the old one
+        public void SelectedChanged(object sender, EventArgs e)
+        {
+            if (selected != null)
+            {
+                selected.Deselect();
+            }
+            selected = sender as NumberButton;
         }
     }
 }

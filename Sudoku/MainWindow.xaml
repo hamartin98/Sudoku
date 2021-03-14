@@ -8,15 +8,15 @@
         Title="MainWindow" Height="800" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="640"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="640"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="CadetBlue" BorderThickness="5" Grid.Column="0">
-            <Grid x:Name="sudokuGrid" Width="640" Height="640">
+            <Grid x:Name="sudokuGrid">
 
             </Grid>
         </Border>
