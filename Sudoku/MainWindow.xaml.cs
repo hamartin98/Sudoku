@@ -21,11 +21,14 @@ namespace Sudoku
     public partial class MainWindow : Window
     {
         private const int SIZE = 9;
+        private List<List<int>> puzzle;
 
         public MainWindow()
         {
             InitializeComponent();
             initGird();
+            setGridData();
+
         }
 
         // Adds row and column definitions to equally align elements based on the size of the grid
@@ -45,6 +48,12 @@ namespace Sudoku
                 colDef.Width = gridLength;
                 sudokuGrid.ColumnDefinitions.Add(colDef);
             }
+        }
+
+        // sets the values on the board
+        private void setGridData()
+        {
+            puzzle = FileIO.readBoard("Puzzles/puzzle1.txt");
         }
     }
 }
