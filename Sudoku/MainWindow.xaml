@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sudoku"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="CadetBlue" BorderThickness="5" Grid.Column="0">
+            <Grid x:Name="sudokuGrid" Width="640" Height="640">
 
+            </Grid>
+        </Border>
+        <StackPanel Grid.Column="1">
+            <Button x:Name="btnSolve" Content="Solve" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
+            <Button x:Name="openPuzzle" Content="Open puzzle" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
+        </StackPanel>
     </Grid>
 </Window>
