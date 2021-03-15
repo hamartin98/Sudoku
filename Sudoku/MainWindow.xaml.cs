@@ -20,6 +20,7 @@ namespace Sudoku
             puzzle = new Puzzle(FileIO.readBoard("Puzzles/puzzle1.txt"));
 
             InitGird();
+            initNumPad();
             SetGridData();
 
         }
@@ -48,6 +49,38 @@ namespace Sudoku
             }
         }
 
+        // Initializes the numberPad
+        private void initNumPad()
+        {
+            Button btn;
+
+            int num = 1;
+
+            for(int row = 0; row < 3; row++)
+            {
+                for(int col = 0; col < 3; col++)
+                {
+                    btn = new Button();
+                    btn.FontSize = 20;
+                    btn.Click += numPadBtnClicked;
+                    Grid.SetRow(btn, row);
+                    Grid.SetColumn(btn, col);
+                    btn.Content = num;
+                    numPad.Children.Add(btn);
+                    num++;
+                }
+            }
+
+            // add clear button
+            btn = new Button();
+            btn.Click += numPadBtnClicked;
+            Grid.SetRow(btn, 3);
+            Grid.SetColumn(btn, 0);
+            Grid.SetColumnSpan(btn, 3);
+            btn.Content = "Clear";
+            numPad.Children.Add(btn);
+        }
+
         // Sets the values on the board
         private void SetGridData()
         {
@@ -62,7 +95,7 @@ namespace Sudoku
                 for (int col = 0; col < SIZE; col++)
                 {
                     actualCol = col + col / 3;
-                    numBtn = new NumberButton(puzzle.ValueAt(row, col));
+                    numBtn = new NumberButton(puzzle.ValueAt(row, col), row, col);
                     numBtn.Width = 64;
                     numBtn.Height = 64;
                     Grid.SetRow(numBtn, actualRow);
@@ -81,6 +114,34 @@ namespace Sudoku
                 selected.Deselect();
             }
             selected = sender as NumberButton;
+        }
+
+        // occurs when a button is clicked on the numpad
+        // sets the selected cells value on the sudoku to the value
+        private void numPadBtnClicked(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            string content = btn.Content.ToString();
+            int value = 0;
+            
+            if(content != "Clear")
+            {
+                value = Int32.Parse(content);
+            }
+
+            changeSelectedValue(value);
+        }
+
+        // sets the value on the board and on the puzzle
+        private void changeSelectedValue(int value)
+        {
+            if (selected != null)
+            {
+                int row = selected.Row;
+                int col = selected.Col;
+                puzzle.SetValue(value, row, col);
+                selected.SetValue(value);
+            }
         }
     }
 }

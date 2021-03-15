@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="605"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="605"/>
@@ -22,6 +22,19 @@
         <StackPanel Grid.Column="1">
             <Button x:Name="btnSolve" Content="Solve" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
             <Button x:Name="openPuzzle" Content="Open puzzle" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
+            <Grid x:Name="numPad" Height="256" Width="192" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

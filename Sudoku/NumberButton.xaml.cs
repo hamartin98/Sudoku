@@ -12,21 +12,25 @@ namespace Sudoku
     {
         private bool isSelected = false;
         private int value = 0;
+        public int Row { get; }
+        public int Col { get; }
 
         public delegate void NumberButtonSelectedEventHandler(object sender, EventArgs args);
         public event NumberButtonSelectedEventHandler ButtonSelected;
 
-        public NumberButton(int value)
+        public NumberButton(int value, int row, int col)
         {
             InitializeComponent();
-            //this.DataContext = this;
+            this.Row = row;
+            this.Col = col;
             Update(value);
         }
 
         private void Update(int value)
         {
             this.value = value;
-            btnNum.Content = value.ToString();
+            // if the value is 0 we display an empty button
+            btnNum.Content = value != 0 ? value.ToString() : " ";
         }
 
         private void btnNum_Click(object sender, RoutedEventArgs e)
