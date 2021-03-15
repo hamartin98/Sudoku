@@ -18,7 +18,7 @@ namespace Sudoku
         If the sum of the numbers in a row, a col or a box not equal 45, we don't need to check for distinct values in it
         */
 
-        private List<List<int>> data { get; }
+        private List<List<int>> data;
         private const int SIZE = 9;
         private const int BOXSIZE = 3;
         private int zeroCount = 0;
@@ -30,6 +30,11 @@ namespace Sudoku
         {
             this.data = data;
             zeroCount = countZeroes();
+        }
+
+        public void SetPuzzle(List<List<int>> data)
+        {
+            this.data = data;
         }
 
         // returns a value from the cell based on row and col
@@ -44,7 +49,6 @@ namespace Sudoku
             data[row][col] = value;
             zeroCount += value == 0 ? 1 : -1; // increase or decrease the count of the zeroes
             zeroCount = Math.Min(0, zeroCount);
-
             IsSolved();
         }
 

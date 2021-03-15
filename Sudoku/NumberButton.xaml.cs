@@ -26,11 +26,7 @@ namespace Sudoku
             this.Row = row;
             this.Col = col;
 
-            if (value != 0)
-            {
-                isSelectable = false;
-            }
-
+            isSelectable = value != 0 ? false : true;
             SetColor();
             Update(value);
         }
@@ -78,6 +74,13 @@ namespace Sudoku
         // Sets the value of the button
         public void SetValue(int value)
         {
+            Update(value);
+        }
+
+        public void SetNewValue(int value)
+        {
+            isSelectable = value != 0 ? false : true;
+            SetColor();
             Update(value);
         }
 

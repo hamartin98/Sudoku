@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,7 @@ namespace Sudoku
         {
             InitializeComponent();
 
-            puzzle = new Puzzle(FileIO.readBoard("Puzzles/fullZero.txt"));
+            puzzle = new Puzzle(FileIO.readBoard("Puzzles/puzzle1.txt"));
             numberButtons = new List<List<NumberButton>>();
 
             InitGird();
@@ -140,7 +141,7 @@ namespace Sudoku
                 for (int col = 0; col < SIZE; col++)
                 {
                     value = puzzle.ValueAt(row, col);
-                    numberButtons[row][col].SetValue(value);
+                    numberButtons[row][col].SetNewValue(value);
                 }
             }
         }
@@ -198,6 +199,19 @@ namespace Sudoku
             else
             {
                 MessageBox.Show("The puzzle cannot be solved");
+            }
+        }
+
+        private void openPuzzle_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "(*.txt) | *.txt";
+            
+            if(fileDialog.ShowDialog() == true)
+            {
+                puzzle.SetPuzzle(FileIO.readBoard(fileDialog.FileName));
+                ModifyGridData();
+                inputAllowed = true;
             }
         }
     }

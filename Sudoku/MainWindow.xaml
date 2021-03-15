@@ -19,7 +19,7 @@
         </Border>
         <StackPanel Grid.Column="1">
             <Button x:Name="btnSolve" Content="Solve" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white" Click="btnSolve_Click"/>
-            <Button x:Name="openPuzzle" Content="Open puzzle" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
+            <Button x:Name="openPuzzle" Content="Open puzzle" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white" Click="openPuzzle_Click"/>
             <Grid x:Name="numPad" Height="256" Width="192" Margin="10" Background="Black">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
