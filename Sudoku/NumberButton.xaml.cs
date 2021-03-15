@@ -19,14 +19,14 @@ namespace Sudoku
         public NumberButton(int value)
         {
             InitializeComponent();
-            this.DataContext = this;
+            //this.DataContext = this;
             Update(value);
         }
 
         private void Update(int value)
         {
             this.value = value;
-            //btnNum.Content = value.ToString();
+            btnNum.Content = value.ToString();
         }
 
         private void btnNum_Click(object sender, RoutedEventArgs e)
@@ -41,7 +41,7 @@ namespace Sudoku
             {
                 OnButtonSelected();
                 isSelected = true;
-                btnNum.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 127, 127, 127));
+                btnNum.BorderBrush = new SolidColorBrush(Color.FromRgb(15, 60, 250));
                 btnNum.BorderThickness = new Thickness(3, 3, 3, 3);
             }
         }

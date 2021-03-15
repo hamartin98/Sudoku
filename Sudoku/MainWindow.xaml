@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sudoku"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800" ResizeMode="NoResize" SizeToContent="Width">
+        Title="MainWindow" Height="800" Width="900" ResizeMode="NoResize" SizeToContent="Width">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="640"/>
+            <ColumnDefinition Width="605"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="640"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="605"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="CadetBlue" BorderThickness="5" Grid.Column="0">
             <Grid x:Name="sudokuGrid">

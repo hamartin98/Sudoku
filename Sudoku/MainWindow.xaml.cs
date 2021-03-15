@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Sudoku
 {
@@ -40,16 +29,21 @@ namespace Sudoku
         {
             RowDefinition rowDef;
             ColumnDefinition colDef;
-            GridLength gridLength = new GridLength(0, GridUnitType.Auto);
+            GridLength gridLength = new GridLength(64, GridUnitType.Pixel);
+            GridLength gridLengthFix = new GridLength(10, GridUnitType.Pixel);
+            GridLength currLength;
 
-            for (int idx = 0; idx < SIZE; idx++)
+            // every fourth row and column will be empty to seperate boxes
+            for (int idx = 0; idx < SIZE + 2; idx++)
             {
+                currLength = idx == 3 || idx == 7 ? gridLengthFix : gridLength;
+
                 rowDef = new RowDefinition();
-                rowDef.Height = gridLength;
+                rowDef.Height = currLength;
                 sudokuGrid.RowDefinitions.Add(rowDef);
 
                 colDef = new ColumnDefinition();
-                colDef.Width = gridLength;
+                colDef.Width = currLength;
                 sudokuGrid.ColumnDefinitions.Add(colDef);
             }
         }
@@ -58,14 +52,21 @@ namespace Sudoku
         private void SetGridData()
         {
             NumberButton numBtn;
+            int actualRow;
+            int actualCol;
 
+            // we need to skip every fourth row and col
             for(int row = 0; row < SIZE; row++)
             {
-                for(int col = 0; col < SIZE; col++)
+                actualRow = row + row / 3;
+                for (int col = 0; col < SIZE; col++)
                 {
+                    actualCol = col + col / 3;
                     numBtn = new NumberButton(puzzle.ValueAt(row, col));
-                    Grid.SetRow(numBtn, row);
-                    Grid.SetColumn(numBtn, col);
+                    numBtn.Width = 64;
+                    numBtn.Height = 64;
+                    Grid.SetRow(numBtn, actualRow);
+                    Grid.SetColumn(numBtn, actualCol);
                     numBtn.ButtonSelected += SelectedChanged;
                     sudokuGrid.Children.Add(numBtn);
                 }
