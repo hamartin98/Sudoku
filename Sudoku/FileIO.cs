@@ -5,7 +5,7 @@ using System.IO;
 namespace Sudoku
 {
     // Responsible for file operations
-    class FileIO
+    public class FileIO
     {
         // Reads puzzle data from file into a list
         public static List<List<int>> readBoard(string path)

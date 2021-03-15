@@ -7,12 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Puzzles\fullBoard.txt" />
     <None Remove="Puzzles\puzzle1.txt" />
+    <None Remove="Puzzles\semiSolution.txt" />
+    <None Remove="Puzzles\testPuzzle.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Puzzles\fullBoard.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Puzzles\semiSolution.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Puzzles\testPuzzle.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Puzzles\puzzle1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

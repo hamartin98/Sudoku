@@ -12,17 +12,27 @@ namespace Sudoku
         private const int SIZE = 9;
         private Puzzle puzzle;
         NumberButton selected = null;
+        private bool inputAllowed = true;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            puzzle = new Puzzle(FileIO.readBoard("Puzzles/puzzle1.txt"));
+            puzzle = new Puzzle(FileIO.readBoard("Puzzles/semiSolution.txt"));
 
             InitGird();
             initNumPad();
             SetGridData();
 
+            puzzle.PuzzleSolved += PuzzleSolved;
+
+        }
+
+        // Triggered when the puzzle is fully solved
+        private void PuzzleSolved(object sender, EventArgs args)
+        {
+            inputAllowed = false;
+            MessageBox.Show("You solved the puzzle");
         }
 
         // Adds row and column definitions to equally align elements based on the size of the grid
@@ -120,16 +130,19 @@ namespace Sudoku
         // sets the selected cells value on the sudoku to the value
         private void numPadBtnClicked(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            string content = btn.Content.ToString();
-            int value = 0;
-            
-            if(content != "Clear")
+            if(inputAllowed)
             {
-                value = Int32.Parse(content);
-            }
+                Button btn = sender as Button;
+                string content = btn.Content.ToString();
+                int value = 0;
 
-            changeSelectedValue(value);
+                if (content != "Clear")
+                {
+                    value = Int32.Parse(content);
+                }
+
+                changeSelectedValue(value);
+            }
         }
 
         // sets the value on the board and on the puzzle
