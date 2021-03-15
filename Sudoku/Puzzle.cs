@@ -308,12 +308,130 @@ namespace Sudoku
             return count;
         }
 
+        // Triggered when the puzzle is solved
         protected virtual void OnPuzzleSolved()
         {
             if (PuzzleSolved != null)
             {
                 PuzzleSolved(this, EventArgs.Empty);
             }
+        }
+
+        // Finds an empty location on the board, returns true if found one
+        private bool FindEmptyLocation(out int resRow, out int resCol)
+        {
+            resRow = -1;
+            resCol = -1;
+
+            for (int row = 0; row < SIZE; row++)
+            {
+                for(int col = 0; col < SIZE; col++)
+                {
+                    if(data[row][col] == 0)
+                    {
+                        resRow = row;
+                        resCol = col;
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        // Returns true if the row contains the number
+        private bool IsRowContains(int row, int number)
+        {
+            for(int col = 0; col < SIZE; col++)
+            {
+                if(ValueEqualsAt(number, row, col))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Returns true if the given column contains the number
+        private bool IsColContains(int col, int number)
+        {
+            for(int row = 0; row < SIZE; row++)
+            {
+                if(ValueEqualsAt(number, row, col))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Returns true if the given box contains the number
+        private bool IsBoxContains(int row, int col, int number)
+        {
+            int startRow = StartRow(row);
+            int startCol = StartCol(col);
+
+            for(int rowIdx = 0; rowIdx < BOXSIZE; rowIdx++)
+            {
+                for(int colIdx = 0; colIdx < BOXSIZE; colIdx++)
+                {
+                    if(ValueEqualsAt(number, startRow + rowIdx, startCol + colIdx))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        // Returns true if the value of the given position equals with the given value
+        private bool ValueEqualsAt(int value, int row, int col)
+        {
+            return data[row][col] == value;
+        }
+
+        // Returns true if the given value is not in the specified row, column and box
+        private bool AllSafe(int row, int col, int number)
+        {
+            return !IsRowContains(row, number) && !IsColContains(col, number) && !IsBoxContains(row, col, number);
+        }
+
+        // Finds the solution to the data
+        private bool FindSolution()
+        {
+            int row;
+            int col;
+            if (!FindEmptyLocation(out row, out col))
+            {
+                return true;
+            }
+
+            for (int number = 1; number <= SIZE; number++)
+            {
+                if (AllSafe(row, col, number))
+                {
+                    data[row][col] = number;
+
+                    if (FindSolution())
+                    {
+                        return true;
+                    }
+
+                    data[row][col] = 0;
+                }
+            }
+
+            return false;
+        }
+
+        // Solves the puzzle, then return the solved puzzle
+        public List<List<int>> SolvePuzzle()
+        {
+            FindSolution();
+            return data;
         }
     }
 }

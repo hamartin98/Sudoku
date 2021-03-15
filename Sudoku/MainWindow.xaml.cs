@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,14 +13,16 @@ namespace Sudoku
     {
         private const int SIZE = 9;
         private Puzzle puzzle;
-        NumberButton selected = null;
+        private NumberButton selected = null;
         private bool inputAllowed = true;
+        private List<List<NumberButton>> numberButtons;
 
         public MainWindow()
         {
             InitializeComponent();
 
             puzzle = new Puzzle(FileIO.readBoard("Puzzles/semiSolution.txt"));
+            numberButtons = new List<List<NumberButton>>();
 
             InitGird();
             initNumPad();
@@ -32,7 +35,7 @@ namespace Sudoku
         private void PuzzleSolved(object sender, EventArgs args)
         {
             inputAllowed = false;
-            MessageBox.Show("You solved the puzzle");
+            MessageBox.Show("You solved the puzzle!");
         }
 
         // Adds row and column definitions to equally align elements based on the size of the grid
@@ -95,26 +98,49 @@ namespace Sudoku
         }
 
         // Sets the values on the board
+        // Used when the board is created
         private void SetGridData()
         {
             NumberButton numBtn;
             int actualRow;
             int actualCol;
+            List<NumberButton> numberButtonRow;
 
             // we need to skip every fourth row and col
-            for(int row = 0; row < SIZE; row++)
+            for (int row = 0; row < SIZE; row++)
             {
+                numberButtonRow = new List<NumberButton>();
+
                 actualRow = row + row / 3;
                 for (int col = 0; col < SIZE; col++)
                 {
                     actualCol = col + col / 3;
                     numBtn = new NumberButton(puzzle.ValueAt(row, col), row, col);
-                    numBtn.Width = 64;
-                    numBtn.Height = 64;
+                    //numBtn.Width = 64;
+                    //numBtn.Height = 64;
                     Grid.SetRow(numBtn, actualRow);
                     Grid.SetColumn(numBtn, actualCol);
                     numBtn.ButtonSelected += SelectedChanged;
                     sudokuGrid.Children.Add(numBtn);
+                    numberButtonRow.Add(numBtn);
+                }
+
+                numberButtons.Add(numberButtonRow);
+            }
+        }
+
+        // Modify the sudoku grid based on the modified data
+        // Used when the puzzle is solved
+        private void ModifyGridData()
+        {
+            int value;
+
+            for (int row = 0; row < SIZE; row++)
+            {
+                for (int col = 0; col < SIZE; col++)
+                {
+                    value = puzzle.ValueAt(row, col);
+                    numberButtons[row][col].SetValue(value);
                 }
             }
         }
@@ -158,6 +184,14 @@ namespace Sudoku
                 puzzle.SetValue(value, row, col);
                 selected.SetValue(value);
             }
+        }
+
+        // Solve the puzzle
+        private void btnSolve_Click(object sender, RoutedEventArgs e)
+        {
+            inputAllowed = false;
+            puzzle.SolvePuzzle();
+            ModifyGridData();
         }
     }
 }
