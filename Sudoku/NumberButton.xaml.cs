@@ -97,7 +97,6 @@ namespace Sudoku
             if(isSelectable)
             {
                 btnNum.Background = new SolidColorBrush(Color.FromRgb(51, 121, 217));
-                btnNum.Foreground = new SolidColorBrush(Color.FromRgb(173, 216, 255));
                 btnNum.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
             }

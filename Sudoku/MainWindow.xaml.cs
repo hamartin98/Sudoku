@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -28,6 +29,7 @@ namespace Sudoku
             InitGird();
             initNumPad();
             SetGridData();
+            LoadDefaultFiles();
 
             puzzle.PuzzleSolved += PuzzleSolved;
         }
@@ -213,6 +215,25 @@ namespace Sudoku
                 ModifyGridData();
                 inputAllowed = true;
             }
+        }
+
+        private void LoadDefaultFiles()
+        {
+            DirectoryInfo df = new DirectoryInfo(@"Puzzles\");
+            foreach(var file in df.GetFiles())
+            {
+                lbPuzzles.Items.Add(file.Name);
+            }
+            
+        }
+
+        private void btnSelect_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = lbPuzzles.SelectedValue;
+            string fileName = @"Puzzles\" + selected;
+            puzzle.SetPuzzle(FileIO.readBoard(fileName));
+            ModifyGridData();
+            inputAllowed = true;
         }
     }
 }

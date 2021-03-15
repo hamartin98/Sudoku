@@ -33,6 +33,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
             </Grid>
+            <ListBox x:Name="lbPuzzles"/>
+            <Button x:Name="btnSelect" Click="btnSelect_Click" Content="Select"/>
         </StackPanel>
     </Grid>
 </Window>
