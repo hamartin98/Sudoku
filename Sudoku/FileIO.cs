@@ -13,6 +13,7 @@ namespace Sudoku
             List<List<int>> result = new List<List<int>>();
             string line;
             List<int> row;
+            int value;
 
             using (StreamReader reader = new StreamReader(path))
             {
@@ -22,7 +23,15 @@ namespace Sudoku
                     line = reader.ReadLine();
                     foreach (var ch in line)
                     {
-                        row.Add(Convert.ToInt32(ch.ToString()));
+                        if(ch > 47 && ch < 58)
+                        {
+                            value = Convert.ToInt32(ch.ToString());
+                        }
+                        else
+                        {
+                            value = 0;
+                        }
+                        row.Add(value);
                     }
                     result.Add(row);
                 }

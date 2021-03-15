@@ -21,7 +21,7 @@ namespace Sudoku
         {
             InitializeComponent();
 
-            puzzle = new Puzzle(FileIO.readBoard("Puzzles/semiSolution.txt"));
+            puzzle = new Puzzle(FileIO.readBoard("Puzzles/fullZero.txt"));
             numberButtons = new List<List<NumberButton>>();
 
             InitGird();
@@ -187,11 +187,18 @@ namespace Sudoku
         }
 
         // Solve the puzzle
+        // Triggered when the user click on the Solve button
         private void btnSolve_Click(object sender, RoutedEventArgs e)
         {
-            inputAllowed = false;
-            puzzle.SolvePuzzle();
-            ModifyGridData();
+            if(puzzle.SolvePuzzle())
+            {
+                inputAllowed = false;
+                ModifyGridData();
+            }
+            else
+            {
+                MessageBox.Show("The puzzle cannot be solved");
+            }
         }
     }
 }

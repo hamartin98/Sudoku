@@ -427,11 +427,10 @@ namespace Sudoku
             return false;
         }
 
-        // Solves the puzzle, then return the solved puzzle
-        public List<List<int>> SolvePuzzle()
+        // Tries to solve the puzzle, then return true if its solved
+        public bool SolvePuzzle()
         {
-            FindSolution();
-            return data;
+            return FindSolution();
         }
     }
 }
