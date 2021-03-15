@@ -11,7 +11,9 @@ namespace Sudoku
     public partial class NumberButton : UserControl
     {
         private bool isSelected = false;
+        private bool isSelectable = true;
         private int value = 0;
+
         public int Row { get; }
         public int Col { get; }
 
@@ -23,6 +25,13 @@ namespace Sudoku
             InitializeComponent();
             this.Row = row;
             this.Col = col;
+
+            if (value != 0)
+            {
+                isSelectable = false;
+            }
+
+            SetColor();
             Update(value);
         }
 
@@ -41,11 +50,11 @@ namespace Sudoku
         // Select the button
         public void Select()
         {
-            if(!isSelected)
+            if(!isSelected && isSelectable)
             {
                 OnButtonSelected();
                 isSelected = true;
-                btnNum.BorderBrush = new SolidColorBrush(Color.FromRgb(15, 60, 250));
+                btnNum.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255));
                 btnNum.BorderThickness = new Thickness(3, 3, 3, 3);
             }
         }
@@ -77,6 +86,22 @@ namespace Sudoku
             if(ButtonSelected != null)
             {
                 ButtonSelected(this, EventArgs.Empty);
+            }
+        }
+
+        private void SetColor()
+        {
+            if(isSelectable)
+            {
+                btnNum.Background = new SolidColorBrush(Color.FromRgb(51, 121, 217));
+                btnNum.Foreground = new SolidColorBrush(Color.FromRgb(173, 216, 255));
+                btnNum.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+
+            }
+            else
+            {
+                btnNum.Background = new SolidColorBrush(Color.FromRgb(23, 66, 118));
+                btnNum.Foreground = new SolidColorBrush(Color.FromRgb(85, 156, 228));
             }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sudoku"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="900" ResizeMode="NoResize" SizeToContent="Width">
+        Title="MainWindow" Height="800" Width="900" ResizeMode="NoResize" FontFamily="Unispace" Background="LightCyan">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="605"/>
@@ -15,14 +15,14 @@
             <RowDefinition Height="605"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="CadetBlue" BorderThickness="5" Grid.Column="0">
-            <Grid x:Name="sudokuGrid">
+            <Grid x:Name="sudokuGrid" Background="Black">
 
             </Grid>
         </Border>
         <StackPanel Grid.Column="1">
             <Button x:Name="btnSolve" Content="Solve" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
             <Button x:Name="openPuzzle" Content="Open puzzle" Margin="10" FontSize="20" Background="CadetBlue" Foreground="white"/>
-            <Grid x:Name="numPad" Height="256" Width="192" Margin="10">
+            <Grid x:Name="numPad" Height="256" Width="192" Margin="10" Background="Black">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

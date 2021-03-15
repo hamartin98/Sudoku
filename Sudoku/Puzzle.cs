@@ -43,12 +43,9 @@ namespace Sudoku
         {
             data[row][col] = value;
             zeroCount += value == 0 ? 1 : -1; // increase or decrease the count of the zeroes
-            Debug.Write(zeroCount);
+            zeroCount = Math.Min(0, zeroCount);
 
-            if(zeroCount == 0)
-            {
-                IsSolved();
-            }
+            IsSolved();
         }
 
         // returns the starting row of the box containing the given row

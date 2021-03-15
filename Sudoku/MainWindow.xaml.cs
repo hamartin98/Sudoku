@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Sudoku
 {
@@ -25,7 +26,6 @@ namespace Sudoku
             SetGridData();
 
             puzzle.PuzzleSolved += PuzzleSolved;
-
         }
 
         // Triggered when the puzzle is fully solved
@@ -82,7 +82,10 @@ namespace Sudoku
         {
             Button btn;
             btn = new Button();
-            btn.FontSize = 20;
+            btn.FontSize = 30; 
+            btn.Background = new SolidColorBrush(Color.FromRgb(23, 66, 118));
+            btn.Foreground = new SolidColorBrush(Color.FromRgb(85, 156, 228));
+            btn.Margin = new Thickness(2);
             btn.Click += numPadBtnClicked;
             Grid.SetRow(btn, row);
             Grid.SetColumn(btn, col);
