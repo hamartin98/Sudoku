@@ -52,32 +52,32 @@ namespace Sudoku
         // Initializes the numberPad
         private void initNumPad()
         {
-            Button btn;
-
             int num = 1;
 
             for(int row = 0; row < 3; row++)
             {
                 for(int col = 0; col < 3; col++)
                 {
-                    btn = new Button();
-                    btn.FontSize = 20;
-                    btn.Click += numPadBtnClicked;
-                    Grid.SetRow(btn, row);
-                    Grid.SetColumn(btn, col);
-                    btn.Content = num;
-                    numPad.Children.Add(btn);
+                    addNumPadButton(row, col, num.ToString(), 1);
                     num++;
                 }
             }
 
             // add clear button
+            addNumPadButton(3, 0, "Clear", 3);
+        }
+
+        // add a new button to the numPad with given parameters
+        private void addNumPadButton(int row, int col, string value, int columnSpan)
+        {
+            Button btn;
             btn = new Button();
+            btn.FontSize = 20;
             btn.Click += numPadBtnClicked;
-            Grid.SetRow(btn, 3);
-            Grid.SetColumn(btn, 0);
-            Grid.SetColumnSpan(btn, 3);
-            btn.Content = "Clear";
+            Grid.SetRow(btn, row);
+            Grid.SetColumn(btn, col);
+            Grid.SetColumnSpan(btn, columnSpan);
+            btn.Content = value;
             numPad.Children.Add(btn);
         }
 
