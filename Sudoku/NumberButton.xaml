@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Sudoku"
              mc:Ignorable="d" 
              d:DesignHeight="64" d:DesignWidth="64">
-    <Grid>
+    <Grid Margin="3">
         <Button FontSize="36" FontFamily="Unispace" Content="0" x:Name="btnNum" Click="btnNum_Click" Foreground="White" Background="#FF00BCD4"/>
     </Grid>
 </UserControl>

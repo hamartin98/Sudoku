@@ -27,9 +27,6 @@ namespace Sudoku
                     }
                     result.Add(row);
                 }
-
-                reader.Close();
-                reader.Dispose();
             }
 
             return result;

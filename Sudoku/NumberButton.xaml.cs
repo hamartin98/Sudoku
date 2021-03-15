@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Sudoku
 {
@@ -49,8 +41,8 @@ namespace Sudoku
             {
                 OnButtonSelected();
                 isSelected = true;
-                btnNum.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 54, 64));
-                btnNum.BorderThickness = new Thickness(4, 4, 4, 4);
+                btnNum.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 127, 127, 127));
+                btnNum.BorderThickness = new Thickness(3, 3, 3, 3);
             }
         }
 
